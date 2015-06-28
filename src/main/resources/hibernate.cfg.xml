@@ -27,6 +27,7 @@
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
 
+		<!-- The mapping file inclusive location, one HBM file can contain multiple entity-mappings -->
         <mapping resource="hibernate_example/hbm/Book.hbm.xml"/>
 
     </session-factory>

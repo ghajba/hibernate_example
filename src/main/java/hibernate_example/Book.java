@@ -2,6 +2,17 @@ package hibernate_example;
 
 import java.text.MessageFormat;
 
+/**
+ * POJO to contain information of books.
+ *
+ * It follows the JavaBeans convention with the private fields and getters and setters for those fields.
+ *
+ * The no-argument constructor is a JavaBean convention too -- however it is a requirement for persistent classes because Hibernate uses the
+ * Java Reflection API to construct the objects.
+ *
+ * @author GHajba
+ *
+ */
 public class Book {
 
     private String isbn;
