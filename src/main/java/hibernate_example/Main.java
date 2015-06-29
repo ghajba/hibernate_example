@@ -23,10 +23,10 @@ public class Main {
         final Session session = factory.openSession();
         final Book book = new Book("9781617291999", "Java 8 in Action", new Date());
         session.beginTransaction();
-        Arrays.stream("Raoul-Gabriel Urma,Mario Fusco,Alan Mycroft".split(",")).map(name -> new Author(name)).forEach(a -> {
-            a.getBooks().add(book);
-            book.getAuthors().add(a);
-            session.save(a);
+        Arrays.stream("Raoul-Gabriel Urma,Mario Fusco,Alan Mycroft".split(",")).map(name -> new Author(name)).forEach(author -> {
+            author.getBooks().add(book);
+            book.getAuthors().add(author);
+            session.save(author);
         });
         session.save(book);
         session.getTransaction().commit();
