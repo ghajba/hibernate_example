@@ -1,6 +1,14 @@
 package hibernate_example;
 
 import java.text.MessageFormat;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * POJO to contain information of books.
@@ -13,19 +21,27 @@ import java.text.MessageFormat;
  * @author GHajba
  *
  */
+@Entity
+@Table(name = "BOOKS")
 public class Book {
 
+    @Id
     private String isbn;
     private String title;
     private String author;
 
+    @Temporal(TemporalType.DATE)
+    @Column(name = "PUBLISHED_DATE")
+    private Date published;
+
     private Book() {
     }
 
-    public Book(String isbn, String title, String author) {
+    public Book(String isbn, String title, String author, Date published) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.published = published;
     }
 
     public String getIsbn() {
@@ -52,8 +68,16 @@ public class Book {
         this.isbn = isbn;
     }
 
+    public Date getPublished() {
+        return this.published;
+    }
+
+    public void setPublished(Date published) {
+        this.published = published;
+    }
+
     @Override
     public String toString() {
-        return MessageFormat.format("{0} by {1} (ISBN: {2})", this.title, this.author, this.isbn);
+        return MessageFormat.format("{0} by {1} (ISBN: {2}), published {3}", this.title, this.author, this.isbn, this.published);
     }
 }

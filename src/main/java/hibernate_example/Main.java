@@ -1,6 +1,7 @@
 package hibernate_example;
 
 import java.text.MessageFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -19,7 +20,7 @@ public class Main {
         final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         final SessionFactory factory = configuration.buildSessionFactory(builder.build());
         final Session session = factory.openSession();
-        final Book book = new Book("9781617291999 ", "Java 8 in Action", "Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft");
+        final Book book = new Book("9781617291999 ", "Java 8 in Action", "Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft", new Date());
         session.beginTransaction();
         session.save(book);
         session.getTransaction().commit();
