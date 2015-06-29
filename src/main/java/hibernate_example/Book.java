@@ -1,11 +1,15 @@
 package hibernate_example;
 
 import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -28,7 +32,8 @@ public class Book {
     @Id
     private String isbn;
     private String title;
-    private String author;
+    @ManyToMany
+    private final List<Author> authors = new ArrayList<>();
 
     @Temporal(TemporalType.DATE)
     @Column(name = "PUBLISHED_DATE")
@@ -37,10 +42,9 @@ public class Book {
     private Book() {
     }
 
-    public Book(String isbn, String title, String author, Date published) {
+    public Book(String isbn, String title, Date published) {
         this.isbn = isbn;
         this.title = title;
-        this.author = author;
         this.published = published;
     }
 
@@ -56,12 +60,8 @@ public class Book {
         this.title = title;
     }
 
-    public String getAuthor() {
-        return this.author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
+    public List<Author> getAuthors() {
+        return this.authors;
     }
 
     public void setIsbn(String isbn) {
@@ -78,6 +78,7 @@ public class Book {
 
     @Override
     public String toString() {
-        return MessageFormat.format("{0} by {1} (ISBN: {2}), published {3}", this.title, this.author, this.isbn, this.published);
+        final String authorNames = this.authors.stream().map(Author::getName).collect(Collectors.joining(", "));
+        return MessageFormat.format("{0} by {1} (ISBN: {2}), published {3}", this.title, authorNames, this.isbn, this.published);
     }
 }

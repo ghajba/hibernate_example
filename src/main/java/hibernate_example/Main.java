@@ -1,6 +1,7 @@
 package hibernate_example;
 
 import java.text.MessageFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -20,8 +21,13 @@ public class Main {
         final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         final SessionFactory factory = configuration.buildSessionFactory(builder.build());
         final Session session = factory.openSession();
-        final Book book = new Book("9781617291999 ", "Java 8 in Action", "Raoul-Gabriel Urma, Mario Fusco, and Alan Mycroft", new Date());
+        final Book book = new Book("9781617291999", "Java 8 in Action", new Date());
         session.beginTransaction();
+        Arrays.stream("Raoul-Gabriel Urma,Mario Fusco,Alan Mycroft".split(",")).map(name -> new Author(name)).forEach(a -> {
+            a.getBooks().add(book);
+            book.getAuthors().add(a);
+            session.save(a);
+        });
         session.save(book);
         session.getTransaction().commit();
         final List<Book> books = session.createCriteria(Book.class).list();

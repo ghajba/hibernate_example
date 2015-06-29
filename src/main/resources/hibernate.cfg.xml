@@ -29,6 +29,7 @@
 
 		<!-- The mapping information of entities -->
         <mapping class="hibernate_example.Book"/>
+        <mapping class="hibernate_example.Author"/>
 
     </session-factory>
 
