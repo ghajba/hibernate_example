@@ -25,8 +25,8 @@ public class Main {
         session.beginTransaction();
         Arrays.stream("Raoul-Gabriel Urma,Mario Fusco,Alan Mycroft".split(",")).map(name -> new Author(name)).forEach(author -> {
             author.getBooks().add(book);
-            book.getAuthors().add(author);
             session.save(author);
+            book.getAuthors().add(author);
         });
         session.save(book);
         session.getTransaction().commit();
