@@ -1,4 +1,4 @@
-package hibernate_example;
+package hibernate_example.tableperclass;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;

@@ -26,10 +26,21 @@
 
         <!-- Drop and re-create the database schema on startup -->
         <property name="hbm2ddl.auto">create</property>
-
+        
 		<!-- The mapping information of entities -->
-        <mapping class="hibernate_example.Book"/>
-        <mapping class="hibernate_example.Author"/>
+        <!-- uncomment the group of four which you intend to use. Enabling all causes a Hibernate exception at startup -->
+<!--         <mapping class="hibernate_example.singletable.Book"/> -->
+<!--         <mapping class="hibernate_example.singletable.Author"/> -->
+<!--         <mapping class="hibernate_example.singletable.Publisher"/> -->
+<!--         <mapping class="hibernate_example.singletable.AbstractPerson"/> -->
+        <mapping class="hibernate_example.joined.Book"/>
+        <mapping class="hibernate_example.joined.Author" />
+        <mapping class="hibernate_example.joined.Publisher"/>
+        <mapping class="hibernate_example.joined.AbstractPerson"/>
+<!--         <mapping class="hibernate_example.tableperclass.Book"/> -->
+<!--         <mapping class="hibernate_example.tableperclass.Author"/> -->
+<!--         <mapping class="hibernate_example.tableperclass.Publisher"/> -->
+<!--         <mapping class="hibernate_example.tableperclass.AbstractPerson"/> -->
 
     </session-factory>
 
