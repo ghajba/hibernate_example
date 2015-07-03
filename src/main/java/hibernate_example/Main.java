@@ -1,6 +1,5 @@
 package hibernate_example;
 
-import hibernate_example.joined.AbstractPerson;
 import hibernate_example.joined.Author;
 import hibernate_example.joined.Book;
 import hibernate_example.joined.Publisher;
@@ -9,6 +8,7 @@ import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -41,15 +41,18 @@ public class Main {
         });
         session.save(book);
         session.getTransaction().commit();
-        final List<Book> books = session.createCriteria(Book.class).list();
+        final List<Book> books = Repository.getBooks(session);
         System.out.println("\n");
-        System.out.println(MessageFormat.format("Storing {0} books in the database", books.size()));
+        System.out.println(MessageFormat.format("Storing {0} book(s) in the database", books.size()));
         for (final Book b : books) {
             System.out.println(b);
         }
         System.out.println("\n");
-        System.out.println(MessageFormat.format("Storing {0} persons in the database.", session.createCriteria(AbstractPerson.class).list()
-                .size()));
+        System.out.println(MessageFormat.format("Storing {0} person(s) in the database.", Repository.countPersons(session)));
+        System.out.println(MessageFormat.format("Storing {0} author(s) in the database.", Repository.countAuthorsWithCriteria(session)));
+        System.out.println(MessageFormat.format("Storing {0} author(s) in the database.", Repository.countAuthorsNative(session)));
+        System.out.println(MessageFormat.format("Authors whose name starts with M: {0}",
+                Repository.authorsNamedM(session).stream().map(a -> ((Author) a).getName()).collect(Collectors.joining(", "))));
         session.close();
         factory.close();
     }
