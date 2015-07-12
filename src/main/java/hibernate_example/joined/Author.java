@@ -19,6 +19,9 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Author extends AbstractPerson {
 
+    Author() {
+    }
+
     @ManyToOne
     @JoinColumn(name = "PUBLISHER_ID")
     private Publisher publisher;

@@ -23,6 +23,7 @@ public class Main {
 
     public static void main(String[] args) {
         final Configuration configuration = new Configuration().configure();
+
         final StandardServiceRegistryBuilder builder = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties());
         final SessionFactory factory = configuration.buildSessionFactory(builder.build());
         final Session session = factory.openSession();
