@@ -1,4 +1,4 @@
-# hibernate_example
+# javatime
 
 This repository contains a sample application done with Hibernate 4.
 
