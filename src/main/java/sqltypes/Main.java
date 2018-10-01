@@ -2,9 +2,6 @@ package sqltypes;
 
 import java.sql.Date;
 import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
