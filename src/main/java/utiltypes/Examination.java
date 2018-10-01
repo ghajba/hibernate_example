@@ -32,6 +32,9 @@ public class Examination {
     @Temporal(TemporalType.TIMESTAMP)
     private Date time;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date timeCalendar;
+
     @ManyToOne(cascade = CascadeType.ALL)
     private Patient patient;
 
@@ -57,6 +60,14 @@ public class Examination {
 
     public void setTime(Date time) {
         this.time = time;
+    }
+
+    public Date getTimeCalendar() {
+        return timeCalendar;
+    }
+
+    public void setTimeCalendar(Date timeCalendar) {
+        this.timeCalendar = timeCalendar;
     }
 
     public Patient getPatient() {

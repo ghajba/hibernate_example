@@ -1,6 +1,7 @@
 package utiltypes;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,11 @@ public class Patient {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
+    @Temporal(TemporalType.DATE)
+    private Calendar birthdayCalendar;
+
     @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Examination> bedheadBoard = new ArrayList<>();
+    private final List<Examination> bedheadBoard = new ArrayList<>();
 
     public String getName() {
         return this.name;
@@ -46,6 +50,14 @@ public class Patient {
 
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
+    }
+
+    public Calendar getBirthdayCalendar() {
+        return birthdayCalendar;
+    }
+
+    public void setBirthdayCalendar(Calendar birthdayCalendar) {
+        this.birthdayCalendar = birthdayCalendar;
     }
 
     public List<Examination> getBedheadBoard() {
